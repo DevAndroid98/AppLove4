@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Đếm Ngày Yêu Thương</string>
+    <string name="text_logo">DESIGN BY DevAndroid</string>
+    <string name="nameboy">Tên bạn nam</string>
+    <string name="namegirl">Tên bạn nữ</string>
+    <string name="datelove">Ngày yêu nhau(ex:05/09/1998)</string>
+    <string name="error">Không được để trống</string>
+    <string name="design">DESIGN BY DevAndroid</string>
+    <string name="error1">Tối đa 9 kí tự</string>
+</resources>

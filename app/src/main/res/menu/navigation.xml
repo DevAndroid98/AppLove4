@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<item android:title="Tính năng">
+
+    <menu>
+        <item android:title="Thông báo"
+            android:icon="@drawable/icons8_love_48"
+            android:id="@+id/thongbao"/>
+        <item android:title="Âm nhạc"
+            android:icon="@drawable/icons8_love_48"
+            android:id="@+id/amnhac"/>
+        <item android:title="Cửa sổ nổi"
+            android:icon="@drawable/icons8_love_48"
+            android:id="@+id/cuasonoi"/>
+        <item android:title="Đồng hồ tình yêu"
+            android:icon="@drawable/icons8_love_48"
+            android:id="@+id/dongho"/>
+            <item android:title="Mật khẩu"
+            android:icon="@drawable/icons8_love_48"
+            android:id="@+id/matkhau"/>
+
+    </menu>
+</item>
+    <item android:title="Thoát"
+        android:id="@+id/exit"/>
+</menu>

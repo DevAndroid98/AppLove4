@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_chat"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    >
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_delete"
+        />
+
+
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:id="@+id/xxx"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+            <ImageView
+
+                android:id="@+id/img_love"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:src="@drawable/tymdong"/>
+            <TextView
+                android:id="@+id/txtnam"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="1"/>
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/img_love1"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:src="@drawable/tymdong"/>
+            <TextView
+                android:id="@+id/txtthang"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="1"/>
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/img_love2"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:src="@drawable/tymdong"/>
+            <TextView
+                android:id="@+id/txtngay"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="1"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/img_love3"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:src="@drawable/tymdong"/>
+            <TextView
+                android:id="@+id/txtgio"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="1"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img_love4"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:src="@drawable/tymdong"/>
+            <TextView
+                android:id="@+id/txtphut"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="1"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="55dp">
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/img_love5"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:src="@drawable/tymdong"/>
+            <TextView
+                android:textSize="8dp"
+                android:id="@+id/txtgiay"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="1"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:id="@+id/nn"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/xxx"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        >
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/nam"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Năm"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/thang"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Tháng"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/ngay"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Ngày"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/gio"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Giờ"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/phut"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Phút"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/giay"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="mlGiây"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:textSize="13sp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/nn"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:id="@+id/txtnoidung"/>
+</RelativeLayout>

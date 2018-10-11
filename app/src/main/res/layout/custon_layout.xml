@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   android:src="@drawable/bo_suu_tap_hinh_nen_dien_thoai_dep_nhat_ve_tinh_yeu_24_550"
+    android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/img_black"
+        android:scaleType="centerCrop"
+        android:alpha="0.4"/>
+    <LinearLayout
+           android:id="@+id/a"
+       android:layout_centerInParent="true"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+       <ImageView
+           android:layout_gravity="center_horizontal"
+           android:layout_width="40dp"
+           android:layout_height="40dp"
+           android:src="@drawable/love4"/>
+       <TextView
+           android:typeface="serif"
+           android:id="@+id/txtc"
+           android:layout_marginTop="10dp"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Ngày Yêu"
+           android:textStyle="bold"
+           android:textColor="@color/white"/>
+   </LinearLayout>
+
+   <TextView
+       android:typeface="serif"
+       android:id="@+id/txta"
+       android:layout_centerVertical="true"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentLeft="true"
+       android:layout_marginLeft="60dp"
+       android:text="NameBoy"
+       android:textColor="@color/white"
+       android:textStyle="bold"/>
+
+    <TextView
+        android:typeface="serif"
+        android:id="@+id/txtb"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="60dp"
+        android:text="NameGirl"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/giayxx"
+        android:text="Mãi mãi bên nhau"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:layout_above="@id/a"/>
+
+</RelativeLayout>

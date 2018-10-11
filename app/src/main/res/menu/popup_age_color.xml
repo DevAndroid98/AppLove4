@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+   <item android:title="Sinh nhật"
+       android:id="@+id/age"/>
+    <item android:title="Màu chữ"
+        android:id="@+id/colortext"/>
+    <item android:id="@+id/font"
+        android:title="Font chữ"/>
+    <item android:title="Màu nền"
+        android:id="@+id/colorbackground"/>
+</menu>

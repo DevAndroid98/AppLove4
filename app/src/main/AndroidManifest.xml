@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.tinh.dev.applove">
+
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        tools:node="replace" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application
+        android:allowBackup="true"
+        android:exported="true"
+        android:icon="@drawable/icons8_love_512"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/icons8_love_512"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".InitializationActivity" />
+        <activity android:name=".Gif" />
+        <activity android:name=".PassWord.InPutPass" />
+        <activity android:name=".PassWord.CreatPass" />
+
+        <service android:name=".service.ChatHeadService" />
+        <service android:name=".service.HinhNenService" />
+        <service android:name=".service.MusicService" />
+        <service android:name=".service.DongHoService" />
+        <service android:name=".service.DongHoTinhYeuService" />
+
+        <receiver android:name=".service.Brosd">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".service.ExampleServicea" />
+
+        <activity android:name=".DemNgayFA">
+
+        </activity>
+    </application>
+
+</manifest>
