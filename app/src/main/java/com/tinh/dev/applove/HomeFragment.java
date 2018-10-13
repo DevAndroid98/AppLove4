@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
     private Window window;
 
     private int REQUEST_CODE_BACKGROUND = 789;
-
+    private int STORAGE_PERMISSION_CODE = 1;
     private Animation anim1;
     private TextView textView;
     private CardView testa;
@@ -100,6 +100,8 @@ public class HomeFragment extends Fragment {
     private LinearLayout relativeLayout;
     private CardView test;
     private RelativeLayout relativeLayout1;
+
+
 
     private CardView test3;
     private CardView test1;
@@ -130,7 +132,7 @@ public class HomeFragment extends Fragment {
     private ImageView imgLove3;
     private ImageView imgLove4;
     private ImageView imgLove5;
-
+   private ImageView img_loading;
     private TextView txtnam;
     private TextView txtthang;
     private TextView txtngay;
@@ -166,7 +168,7 @@ public class HomeFragment extends Fragment {
     private int i, i1, i2, i3, i4;
     private ImageView settings, love;
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
-    private  boolean t = false;
+    private boolean t = false;
     private CardView tolbar;
 
 
@@ -186,7 +188,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
         typeFace();
-        mp3=view.findViewById(R.id.mp3);
+        mp3 = view.findViewById(R.id.mp3);
+
         dataBase = new DataBase(getActivity());
         baseNgaySinhNhat = new BaseNgaySinhNhat(getActivity());
         cardView = view.findViewById(R.id.toolbar);
@@ -203,13 +206,13 @@ public class HomeFragment extends Fragment {
         Animation lv = AnimationUtils.loadAnimation(getActivity(), R.anim.anim8);
         love.setAnimation(lv);
 
-        imgLove=view.findViewById(R.id.img_love);
-        imgLove1=view.findViewById(R.id.img_love1);
-        imgLove2=view.findViewById(R.id.img_love2);
-        imgLove3=view.findViewById(R.id.img_love3);
-        imgLove4=view.findViewById(R.id.img_love4);
-        imgLove5=view.findViewById(R.id.img_love5);
-        tolbar=view.findViewById(R.id.toolbar);
+        imgLove = view.findViewById(R.id.img_love);
+        imgLove1 = view.findViewById(R.id.img_love1);
+        imgLove2 = view.findViewById(R.id.img_love2);
+        imgLove3 = view.findViewById(R.id.img_love3);
+        imgLove4 = view.findViewById(R.id.img_love4);
+        imgLove5 = view.findViewById(R.id.img_love5);
+        tolbar = view.findViewById(R.id.toolbar);
 
         imgbackground = view.findViewById(R.id.background);
         // window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.pink));
@@ -241,7 +244,6 @@ public class HomeFragment extends Fragment {
         txtNameGirl.setAnimation(animation);
         relativeLayout.setAnimation(animation);
         test.setAnimation(animation);
-
 
 
         typeface = Typeface.createFromAsset(getActivity().getAssets(), "love_girl.ttf");
@@ -345,7 +347,7 @@ public class HomeFragment extends Fragment {
         xetfont3();
         xetfont4();
         getDataName();
-        getDataDate();
+        //getDataDate();
         cungHoangDao();
         updateNgayyeu();
         toolbarx();
@@ -357,24 +359,19 @@ public class HomeFragment extends Fragment {
                     Uri.parse("package:" + getActivity().getPackageName()));
             startActivityForResult(intent, CODE_DRAW_OVER_OTHER_APP_PERMISSION);
         } else {
-            settings.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    clicksetting();
-                }
-            });
+            settings.setVisibility(View.GONE);
         }
 
         if (!hp.equals("")) {
             txtHanhPhuc.setText(hp);
         }
-            int xx=sharedPreferences.getInt("test",1);
-        if (xx!=1){
+        int xx = sharedPreferences.getInt("test", 1);
+        if (xx != 1) {
             test.setCardBackgroundColor(xx);
             test.setRadius(46f);
         }
-        int xxx=sharedPreferences.getInt("test1",1);
-        if (xxx!=1){
+        int xxx = sharedPreferences.getInt("test1", 1);
+        if (xxx != 1) {
             test1.setCardBackgroundColor(xxx);
             test1.setRadius(46f);
         }
@@ -430,60 +427,64 @@ public class HomeFragment extends Fragment {
             editor.commit();
         }
         if (requestCode == CODE_DRAW_OVER_OTHER_APP_PERMISSION) {
-              if (Settings.canDrawOverlays(getActivity())) {
-                  settings.setOnClickListener(new View.OnClickListener() {
-                      @Override
-                      public void onClick(View v) {
-                          clicksetting();
-                      }
-                  });
+            if (Settings.canDrawOverlays(getActivity())) {
+                settings.setVisibility(View.GONE);
             } else {
                 Toast.makeText(getActivity(),
                         "Cửa sổ sẽ không hoạt động được",
                         Toast.LENGTH_LONG).show();
             }
 
-    } else
-        {
-        super.onActivityResult(requestCode, resultCode, data);
+
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+
+
     }
-
-
-}
 
     public void requestRead() {
-        if (ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
-        } else {
-            if (uribackground.equals("")) {
-                imgbackground.setImageResource(R.drawable.hinhnen_1);
-            } else {
-                imgbackground.setImageURI(Uri.parse(Uri.decode(uribackground)));
-            }
-            if (uriBoy.equals("")) {
-                pro1.setVisibility(View.VISIBLE);
-                imgBoy.setImageResource(R.drawable.hinhnen_1);
-            } else {
-                pro1.setVisibility(View.INVISIBLE);
-                imgBoy.setImageURI(Uri.parse(Uri.decode(uriBoy)));
-            }
+            if (ContextCompat.checkSelfPermission(getActivity(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
 
-            if (uriGirl.equals("")) {
-                pro2.setVisibility(View.VISIBLE);
-                imgGirl.setImageResource(R.drawable.hinhnen_1);
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
             } else {
-                pro2.setVisibility(View.INVISIBLE);
-                imgGirl.setImageURI(Uri.parse(Uri.decode(uriGirl)));
-            }
+                try {
+                    if (uribackground.equals("")) {
+                        imgbackground.setImageResource(R.drawable.hinhnen_1);
+                    } else {
+                        imgbackground.setImageURI(Uri.parse(Uri.decode(uribackground)));
+                    }
+                    if (uriBoy.equals("")) {
+                        pro1.setVisibility(View.VISIBLE);
+                        imgBoy.setImageResource(R.drawable.hinhnen_1);
+                    } else {
+                        pro1.setVisibility(View.INVISIBLE);
+                        imgBoy.setImageURI(Uri.parse(Uri.decode(uriBoy)));
+                    }
 
+                    if (uriGirl.equals("")) {
+                        pro2.setVisibility(View.VISIBLE);
+                        imgGirl.setImageResource(R.drawable.hinhnen_1);
+                    } else {
+                        pro2.setVisibility(View.INVISIBLE);
+                        imgGirl.setImageURI(Uri.parse(Uri.decode(uriGirl)));
+                    }
+                }
+
+                catch (Exception e){
+
+                    }
+
+
+            }
 
         }
-    }
+
 
 
     private void typeFace() {
@@ -509,6 +510,7 @@ public class HomeFragment extends Fragment {
         clickfont();
         dialog.show();
     }
+
     private void dialogfont1() {
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_card_font);
@@ -517,6 +519,7 @@ public class HomeFragment extends Fragment {
         clickfont1();
         dialog.show();
     }
+
     private void dialogfont2() {
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_card_font);
@@ -525,6 +528,7 @@ public class HomeFragment extends Fragment {
         clickfont2();
         dialog.show();
     }
+
     private void dialogfont3() {
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_card_font);
@@ -533,6 +537,7 @@ public class HomeFragment extends Fragment {
         clickfont3();
         dialog.show();
     }
+
     private void dialogfont4() {
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_card_font);
@@ -640,6 +645,8 @@ public class HomeFragment extends Fragment {
                 .build()
                 .show();
     }
+
+
 
     private void color3() {
 
@@ -822,6 +829,7 @@ public class HomeFragment extends Fragment {
                 .build()
                 .show();
     }
+
     private void color8() {
 
         changeBackgroundColor(currentBackgroundColor);
@@ -858,6 +866,7 @@ public class HomeFragment extends Fragment {
                 .build()
                 .show();
     }
+
     private void color9() {
 
         changeBackgroundColor(currentBackgroundColor);
@@ -924,6 +933,7 @@ public class HomeFragment extends Fragment {
         });
         popupMenu.show();
     }
+
     public void popupNameGirl() {
         PopupMenu popupMenu = new PopupMenu(getActivity(), txtNameGirl);
         popupMenu.getMenuInflater().inflate(R.menu.popup_name_font, popupMenu.getMenu());
@@ -948,6 +958,7 @@ public class HomeFragment extends Fragment {
         });
         popupMenu.show();
     }
+
     public void popupHanhPhuc() {
         PopupMenu popupMenu = new PopupMenu(getActivity(), txtHanhPhuc);
         popupMenu.getMenuInflater().inflate(R.menu.popup_name_font, popupMenu.getMenu());
@@ -972,6 +983,7 @@ public class HomeFragment extends Fragment {
         });
         popupMenu.show();
     }
+
     public void popupCungBoy() {
         PopupMenu popupMenu = new PopupMenu(getActivity(), test3);
         popupMenu.getMenuInflater().inflate(R.menu.popup_age_color, popupMenu.getMenu());
@@ -999,6 +1011,7 @@ public class HomeFragment extends Fragment {
         });
         popupMenu.show();
     }
+
     public void popupCungGirl() {
         PopupMenu popupMenu = new PopupMenu(getActivity(), test2);
         popupMenu.getMenuInflater().inflate(R.menu.popup_age_color, popupMenu.getMenu());
@@ -1026,118 +1039,7 @@ public class HomeFragment extends Fragment {
         popupMenu.show();
     }
 
-    public void clicksetting(){
-        PopupMenu setting=new PopupMenu(getActivity(),settings);
 
-        setting.getMenuInflater().inflate(R.menu.navigation,setting.getMenu());
-
-        setting.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.thongbao:
-                        getActivity().sendBroadcast(new Intent(getActivity(), Brosd.class));
-                        break;
-                    case R.id.amnhac:
-                       Dialog dialog=new Dialog(getActivity());
-                       editor=sharedPreferences.edit();
-                       dialog.setContentView(R.layout.dialog_nhac);
-                        final ImageView nhac=dialog.findViewById(R.id.nhac);
-                        int x=sharedPreferences.getInt("nhac",0);
-                        if (x==1){
-                            nhac.setImageResource(R.drawable.stop);
-                            t=true;
-                        }else if (x==2){
-                            nhac.setImageResource(R.drawable.start);
-                            t=false;
-                        }
-                        nhac.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if (t==false){
-                                   getActivity().startService(new Intent(getActivity(), MusicService.class));
-                                   nhac.setImageResource(R.drawable.stop);
-                                   editor.putInt("nhac",1);
-                                   editor.commit();
-                                    t=true;
-                                }else {
-                                    getActivity().stopService(new Intent(getActivity(), MusicService.class));
-                                    nhac.setImageResource(R.drawable.start);
-                                    editor.putInt("nhac",2);
-                                    editor.commit();
-                                    t=false;
-                                }
-                            }
-                        });
-                       dialog.show();
-
-
-                        break;
-                    case  R.id.cuasonoi:
-                      Intent intent = new Intent(getActivity(), ChatHeadService.class);
-                      intent.putExtra("a",uribackground);
-                      intent.putExtra("b",uriBoy);
-                      intent.putExtra("c",uriGirl);
-                      getActivity().startService(intent);
-
-                        break;
-                    case R.id.dongho:
-                        getActivity().startService(new Intent(getActivity(), DongHoService.class));
-                        break;
-                    case R.id.exit:
-                        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-                        builder.setTitle("Thoát");
-                        builder.setMessage("Bạn có muốn thoát không?");
-                        builder.setIcon(R.drawable.icons8_cancel_48);
-                        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                              getActivity().finish();
-                            }
-                        });
-                        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                        builder.show();
-                        break;
-                    case R.id.matkhau:
-                         editor=sharedPreferences.edit();
-                          int a=sharedPreferences.getInt("matkhau",1);
-                           if (a==1){
-                               editor.putInt("matkhau",2);
-                               editor.commit();
-                               startActivity(new Intent(getActivity(), CreatPass.class));
-                           }else {
-                              AlertDialog.Builder builder1=new AlertDialog.Builder(getActivity());
-                              builder1.setTitle("Thông báo");
-                              builder1.setMessage("Bạn có muốn tắt mật khẩu không?");
-                              builder1.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                                  @Override
-                                  public void onClick(DialogInterface dialog, int which) {
-                                      dataBase.updatetPassWord(2,1);
-                                      editor.putInt("matkhau",1);
-                                      editor.commit();
-                                  }
-                              });
-                           builder1.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                               @Override
-                               public void onClick(DialogInterface dialog, int which) {
-
-                               }
-                           });
-                           builder1.show();
-                           }
-
-                           break;
-                }
-                return true;
-            }
-        });
-        setting.show();
-    }
 
 
     public void font() {
@@ -1287,6 +1189,7 @@ public class HomeFragment extends Fragment {
         });
 
     }
+
     public void clickfont1() {
         view0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1418,6 +1321,7 @@ public class HomeFragment extends Fragment {
         });
 
     }
+
     public void clickfont2() {
         view0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1549,6 +1453,7 @@ public class HomeFragment extends Fragment {
         });
 
     }
+
     public void clickfont3() {
         view0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1680,6 +1585,7 @@ public class HomeFragment extends Fragment {
         });
 
     }
+
     public void clickfont4() {
         view0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1864,7 +1770,7 @@ public class HomeFragment extends Fragment {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clicksetting();
+
             }
         });
         love.setOnClickListener(new View.OnClickListener() {
@@ -1876,7 +1782,7 @@ public class HomeFragment extends Fragment {
         loaddingWave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-popNoidung();
+                popNoidung();
             }
         });
         test.setOnClickListener(new View.OnClickListener() {
@@ -2012,7 +1918,7 @@ popNoidung();
 
     private void xetfont3() {
         if (i3 == 0) {
-            txtCungBoy.setTypeface(typeface);
+            txtCungBoy.setTypeface(font_10);
         }
         if (i3 == 1) {
             txtCungBoy.setTypeface(font_1);
@@ -2051,7 +1957,7 @@ popNoidung();
 
     private void xetfont4() {
         if (i4 == 0) {
-            txtCungGirl.setTypeface(typeface);
+            txtCungGirl.setTypeface(font_10);
         }
         if (i4 == 1) {
             txtCungGirl.setTypeface(font_1);
@@ -2109,7 +2015,7 @@ popNoidung();
             }
 
         }
-       getData();
+        getData();
 
     }
 
@@ -2225,133 +2131,133 @@ popNoidung();
                 txtCungBoy.setText("Song Ngư");
             }
 
+        }
+        if (c.moveToNext()) {
+            int ngay3 = c.getInt(1);
+            int thang3 = c.getInt(2);
+            int nam3 = c.getInt(3);
+            int tuoiNu = namhientai - nam3;
+            if (tuoiNu == 0) {
+                txtAgeGirl.setText("?");
+            } else {
+                txtAgeGirl.setText(tuoiNu + "");
             }
-            if (c.moveToNext()){
-                int ngay3 = c.getInt(1);
-                int thang3 = c.getInt(2);
-                int nam3 = c.getInt(3);
-                int tuoiNu = namhientai - nam3;
-                if (tuoiNu == 0) {
-                    txtAgeGirl.setText("?");
-                } else {
-                    txtAgeGirl.setText(tuoiNu + "");
-                }
-                if (ngay3 >= 21 && ngay3 <= 31 && thang3 == 3) {
-                    txtCungGirl.setText("Bạch Dương");
-                }
-
-                if (ngay3 >= 1 && ngay3 <= 20 && thang3 == 4) {
-                    txtCungGirl.setText("Bạch Dương");
-                }
-
-                if (ngay3 >= 21 && ngay3 <= 31 && thang3 == 4) {
-                    txtCungGirl.setText("Kim Ngưu");
-                }
-
-                if (ngay3 >= 1 && ngay3 <= 20 && thang3 == 5) {
-                    txtCungGirl.setText("Kim Ngưu");
-                }
-
-                if (ngay3 >= 21 && ngay3 <= 31 && thang3 == 5) {
-                    txtCungGirl.setText("Song Tử");
-                }
-
-                if (ngay3 >= 1 && ngay3 <= 21 && thang3 == 6) {
-                    txtCungGirl.setText("Song Tử");
-                }
-
-                if (ngay3 >= 22 && ngay3 <= 31 && thang3 == 6) {
-                    txtCungGirl.setText("Cự Giải");
-                }
-
-                if (ngay3 >= 1 && ngay3 <= 22 && thang3 == 7) {
-                    txtCungGirl.setText("Cự Giải");
-                }
-
-                if (ngay3 >= 23 && ngay3 <= 31 && thang3 == 7) {
-                    txtCungGirl.setText("Sư Tử");
-                }
-
-                if (ngay3 >= 1 && ngay3 <= 22 && thang3 == 8) {
-                    txtCungGirl.setText("Sư Tử");
-                }
-
-                if (ngay3 >= 23 && ngay3 <= 31 && thang3 == 8) {
-                    txtCungGirl.setText("Xử Nữ");
-                }
-
-                if (ngay3 >= 1 && ngay3 <= 22 && thang3 == 9) {
-                    txtCungGirl.setText("Xử Nữ");
-                }
-
-                if (ngay3 >= 23 && ngay3 <= 31 && thang3 == 9) {
-                    txtCungGirl.setText("Thiên Bình");
-                }
-
-                if (ngay3 >= 1 && ngay3 <= 23 && thang3 == 10) {
-                    txtCungGirl.setText("Thiên Bình");
-                }
-
-                if (ngay3 >= 24 && ngay3 <= 31 && thang3 == 10) {
-                    txtCungGirl.setText("Bọ Cạp");
-                }
-
-                if (ngay3 >= 1 && ngay3 <= 22 && thang3 == 11) {
-                    txtCungGirl.setText("Bọ Cạp");
-                }
-
-                if (ngay3 >= 23 && ngay3 <= 31 && thang3 == 11) {
-                    txtCungGirl.setText("Nhân Mã");
-                }
-
-                if (ngay3 >= 1 && ngay3 <= 21 && thang3 == 12) {
-                    txtCungGirl.setText("Nhân Mã");
-                }
-                if (ngay3 >= 22 && ngay3 <= 31 && thang3 == 12) {
-                    txtCungGirl.setText("Ma Kết");
-                }
-
-                if (ngay3 >= 1 && ngay3 <= 19 && thang3 == 1) {
-                    txtCungGirl.setText("Ma Kết");
-                }
-
-                if (ngay3 >= 20 && ngay3 <= 31 && thang3 == 1) {
-                    txtCungGirl.setText("Bảo Bình");
-                }
-
-                if (ngay3 >= 1 && ngay3 <= 18 && thang3 == 2) {
-                    txtCungGirl.setText("Bảo Bình");
-                }
-
-                if (ngay3 >= 19 && ngay3 <= 31 && thang3 == 2) {
-                    txtCungGirl.setText("Song Ngư");
-                }
-
-                if (ngay3 >= 1 && ngay3 <= 20 && thang3 == 3) {
-                    txtCungGirl.setText("Song Ngư");
-                }
+            if (ngay3 >= 21 && ngay3 <= 31 && thang3 == 3) {
+                txtCungGirl.setText("Bạch Dương");
             }
+
+            if (ngay3 >= 1 && ngay3 <= 20 && thang3 == 4) {
+                txtCungGirl.setText("Bạch Dương");
+            }
+
+            if (ngay3 >= 21 && ngay3 <= 31 && thang3 == 4) {
+                txtCungGirl.setText("Kim Ngưu");
+            }
+
+            if (ngay3 >= 1 && ngay3 <= 20 && thang3 == 5) {
+                txtCungGirl.setText("Kim Ngưu");
+            }
+
+            if (ngay3 >= 21 && ngay3 <= 31 && thang3 == 5) {
+                txtCungGirl.setText("Song Tử");
+            }
+
+            if (ngay3 >= 1 && ngay3 <= 21 && thang3 == 6) {
+                txtCungGirl.setText("Song Tử");
+            }
+
+            if (ngay3 >= 22 && ngay3 <= 31 && thang3 == 6) {
+                txtCungGirl.setText("Cự Giải");
+            }
+
+            if (ngay3 >= 1 && ngay3 <= 22 && thang3 == 7) {
+                txtCungGirl.setText("Cự Giải");
+            }
+
+            if (ngay3 >= 23 && ngay3 <= 31 && thang3 == 7) {
+                txtCungGirl.setText("Sư Tử");
+            }
+
+            if (ngay3 >= 1 && ngay3 <= 22 && thang3 == 8) {
+                txtCungGirl.setText("Sư Tử");
+            }
+
+            if (ngay3 >= 23 && ngay3 <= 31 && thang3 == 8) {
+                txtCungGirl.setText("Xử Nữ");
+            }
+
+            if (ngay3 >= 1 && ngay3 <= 22 && thang3 == 9) {
+                txtCungGirl.setText("Xử Nữ");
+            }
+
+            if (ngay3 >= 23 && ngay3 <= 31 && thang3 == 9) {
+                txtCungGirl.setText("Thiên Bình");
+            }
+
+            if (ngay3 >= 1 && ngay3 <= 23 && thang3 == 10) {
+                txtCungGirl.setText("Thiên Bình");
+            }
+
+            if (ngay3 >= 24 && ngay3 <= 31 && thang3 == 10) {
+                txtCungGirl.setText("Bọ Cạp");
+            }
+
+            if (ngay3 >= 1 && ngay3 <= 22 && thang3 == 11) {
+                txtCungGirl.setText("Bọ Cạp");
+            }
+
+            if (ngay3 >= 23 && ngay3 <= 31 && thang3 == 11) {
+                txtCungGirl.setText("Nhân Mã");
+            }
+
+            if (ngay3 >= 1 && ngay3 <= 21 && thang3 == 12) {
+                txtCungGirl.setText("Nhân Mã");
+            }
+            if (ngay3 >= 22 && ngay3 <= 31 && thang3 == 12) {
+                txtCungGirl.setText("Ma Kết");
+            }
+
+            if (ngay3 >= 1 && ngay3 <= 19 && thang3 == 1) {
+                txtCungGirl.setText("Ma Kết");
+            }
+
+            if (ngay3 >= 20 && ngay3 <= 31 && thang3 == 1) {
+                txtCungGirl.setText("Bảo Bình");
+            }
+
+            if (ngay3 >= 1 && ngay3 <= 18 && thang3 == 2) {
+                txtCungGirl.setText("Bảo Bình");
+            }
+
+            if (ngay3 >= 19 && ngay3 <= 31 && thang3 == 2) {
+                txtCungGirl.setText("Song Ngư");
+            }
+
+            if (ngay3 >= 1 && ngay3 <= 20 && thang3 == 3) {
+                txtCungGirl.setText("Song Ngư");
+            }
+        }
 
     }
 
-    private void doiNameGirl(){
-        final Dialog dialog=new Dialog(getActivity());
+    private void doiNameGirl() {
+        final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_name);
-        final EditText editText=dialog.findViewById(R.id.txtName);
-        Button thaydoi=dialog.findViewById(R.id.thaydoi);
+        final EditText editText = dialog.findViewById(R.id.txtName);
+        Button thaydoi = dialog.findViewById(R.id.thaydoi);
         editText.setText(txtNameGirl.getText().toString().trim());
         thaydoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (editText.getText().toString().trim().equals("")){
+                if (editText.getText().toString().trim().equals("")) {
                     editText.setError(getString(R.string.error));
                     return;
                 }
-                if (editText.getText().toString().trim().length()>20){
+                if (editText.getText().toString().trim().length() > 20) {
                     editText.setError("Tối đa 20 kí tự");
                     return;
                 }
-                dataBase.updateTen(txtNameBoy.getText().toString().trim(),editText.getText().toString().trim(),1);
+                dataBase.updateTen(txtNameBoy.getText().toString().trim(), editText.getText().toString().trim(), 1);
                 getDataName();
                 dialog.dismiss();
             }
@@ -2359,24 +2265,25 @@ popNoidung();
 
         dialog.show();
     }
-    private void doiNameBoy(){
-        final Dialog dialog=new Dialog(getActivity());
+
+    private void doiNameBoy() {
+        final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_name);
-        final EditText editText=dialog.findViewById(R.id.txtName);
-        Button thaydoi=dialog.findViewById(R.id.thaydoi);
+        final EditText editText = dialog.findViewById(R.id.txtName);
+        Button thaydoi = dialog.findViewById(R.id.thaydoi);
         editText.setText(txtNameBoy.getText().toString().trim());
         thaydoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (editText.getText().toString().trim().equals("")){
+                if (editText.getText().toString().trim().equals("")) {
                     editText.setError(getString(R.string.error));
                     return;
                 }
-                if (editText.getText().toString().trim().length()>20){
+                if (editText.getText().toString().trim().length() > 20) {
                     editText.setError("Tối đa 20 kí tự");
                     return;
                 }
-                dataBase.updateTen(editText.getText().toString().trim(),txtNameGirl.getText().toString().trim(),1);
+                dataBase.updateTen(editText.getText().toString().trim(), txtNameGirl.getText().toString().trim(), 1);
                 getDataName();
                 dialog.dismiss();
             }
@@ -2384,26 +2291,27 @@ popNoidung();
 
         dialog.show();
     }
-    private void doiHanhPhuc(){
-        final Dialog dialog=new Dialog(getActivity());
+
+    private void doiHanhPhuc() {
+        final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_name);
-        final EditText editText=dialog.findViewById(R.id.txtName);
-        Button thaydoi=dialog.findViewById(R.id.thaydoi);
+        final EditText editText = dialog.findViewById(R.id.txtName);
+        Button thaydoi = dialog.findViewById(R.id.thaydoi);
         editText.setText(txtHanhPhuc.getText().toString().trim());
         thaydoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (editText.getText().toString().trim().equals("")){
+                if (editText.getText().toString().trim().equals("")) {
                     editText.setError(getString(R.string.error));
                     return;
                 }
-                if (editText.getText().toString().trim().length()>20){
+                if (editText.getText().toString().trim().length() > 20) {
                     editText.setError("Tối đa 20 kí tự");
                     return;
                 }
                 txtHanhPhuc.setText(editText.getText().toString().trim());
-                editor=sharedPreferences.edit();
-                editor.putString("hanhphucx",editText.getText().toString().trim());
+                editor = sharedPreferences.edit();
+                editor.putString("hanhphucx", editText.getText().toString().trim());
                 editor.commit();
                 dialog.dismiss();
             }
@@ -2419,7 +2327,7 @@ popNoidung();
         dialog.setCancelable(false);
         dialog.setTitle("Thêm");
         Button chonngay1 = dialog.findViewById(R.id.chonngay1);
-        TextView txtLogo=dialog.findViewById(R.id.txtLogo);
+        TextView txtLogo = dialog.findViewById(R.id.txtLogo);
 
         final EditText ngay1;
         Button luu = dialog.findViewById(R.id.luu);
@@ -2429,7 +2337,7 @@ popNoidung();
         ngay1.setEnabled(false);
 
 
-        Animation animation=AnimationUtils.loadAnimation(getActivity(),R.anim.anim3);
+        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.anim3);
         chonngay1.setAnimation(animation);
         ngay1.setAnimation(animation);
 
@@ -2485,7 +2393,7 @@ popNoidung();
         luu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ngay1.getText().toString().equals("") ) {
+                if (ngay1.getText().toString().equals("")) {
                     Toast.makeText(getActivity(), "Chưa có gì để thêm", Toast.LENGTH_SHORT).show();
                 } else {
 
@@ -2501,6 +2409,7 @@ popNoidung();
 
 
     }
+
     private void themNgaySinhNhatNu() {
         final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_age);
@@ -2513,22 +2422,22 @@ popNoidung();
         Button luu = dialog.findViewById(R.id.luu);
         Button huy = dialog.findViewById(R.id.huybo);
         ngay1 = dialog.findViewById(R.id.ngaysinh1);
-        TextView txtLogo=dialog.findViewById(R.id.txtLogo);
+        TextView txtLogo = dialog.findViewById(R.id.txtLogo);
         ngay1.setEnabled(false);
 
-        Animation animation=AnimationUtils.loadAnimation(getActivity(),R.anim.anim3);
+        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.anim3);
         chonngay1.setAnimation(animation);
         ngay1.setAnimation(animation);
 
         luu.setAnimation(animation);
         huy.setAnimation(animation);
         Cursor c = baseNgaySinhNhat.getNu();
-        if (c.moveToNext()){
-        int ngay3 = c.getInt(1);
-        int thang3 = c.getInt(2);
-        int nam3 = c.getInt(3);
-        ngay1.setText(ngay3 + "-" + thang3 + "-" + nam3 + "(Bạn Nữ)");
-        txtLogo.setText("Cập nhật ngày sinh");
+        if (c.moveToNext()) {
+            int ngay3 = c.getInt(1);
+            int thang3 = c.getInt(2);
+            int nam3 = c.getInt(3);
+            ngay1.setText(ngay3 + "-" + thang3 + "-" + nam3 + "(Bạn Nữ)");
+            txtLogo.setText("Cập nhật ngày sinh");
         }
 
         chonngay1.setOnClickListener(new View.OnClickListener() {
@@ -2593,7 +2502,7 @@ popNoidung();
         int a1 = (int) (calendarTwo.getTimeInMillis() / (1000 * 60 * 60 * 24));
         if (cursor4.moveToNext()) {
             int a2 = cursor4.getInt(1);
-            int a = a1 - a2;
+            int a = (a1 - a2) + 1;
             dataBase.updateSoNgayYeu(a, 1);
 
         }
@@ -2601,29 +2510,29 @@ popNoidung();
         getData();
     }
 
-    public void dialog_love(){
-        final Dialog dialog=new Dialog(getActivity());
-        editor=sharedPreferences.edit();
+    public void dialog_love() {
+        final Dialog dialog = new Dialog(getActivity());
+        editor = sharedPreferences.edit();
         dialog.setContentView(R.layout.dialog_trai_tim);
-         CardView love1;
-         CardView love3;
-         CardView love6;
-         CardView love2;
-         CardView love4;
-         CardView love5;
+        CardView love1;
+        CardView love3;
+        CardView love6;
+        CardView love2;
+        CardView love4;
+        CardView love5;
 
-        love1 =  dialog.findViewById(R.id.love1);
-        love3 =  dialog.findViewById(R.id.love3);
-        love6 =  dialog.findViewById(R.id.love6);
-        love2 =  dialog.findViewById(R.id.love2);
-        love4 =  dialog.findViewById(R.id.love4);
-        love5 =  dialog.findViewById(R.id.love5);
+        love1 = dialog.findViewById(R.id.love1);
+        love3 = dialog.findViewById(R.id.love3);
+        love6 = dialog.findViewById(R.id.love6);
+        love2 = dialog.findViewById(R.id.love2);
+        love4 = dialog.findViewById(R.id.love4);
+        love5 = dialog.findViewById(R.id.love5);
 
         love1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 love.setImageResource(R.drawable.love1);
-                editor.putInt("love",1);
+                editor.putInt("love", 1);
                 editor.commit();
                 dialog.dismiss();
             }
@@ -2633,7 +2542,7 @@ popNoidung();
             @Override
             public void onClick(View v) {
                 love.setImageResource(R.drawable.love2);
-                editor.putInt("love",2);
+                editor.putInt("love", 2);
                 editor.commit();
                 dialog.dismiss();
             }
@@ -2644,7 +2553,7 @@ popNoidung();
             @Override
             public void onClick(View v) {
                 love.setImageResource(R.drawable.love3);
-                editor.putInt("love",3);
+                editor.putInt("love", 3);
                 editor.commit();
                 dialog.dismiss();
             }
@@ -2655,7 +2564,7 @@ popNoidung();
             @Override
             public void onClick(View v) {
                 love.setImageResource(R.drawable.love4);
-                editor.putInt("love",4);
+                editor.putInt("love", 4);
                 editor.commit();
                 dialog.dismiss();
             }
@@ -2666,7 +2575,7 @@ popNoidung();
             @Override
             public void onClick(View v) {
                 love.setImageResource(R.drawable.love5);
-                editor.putInt("love",5);
+                editor.putInt("love", 5);
                 editor.commit();
                 dialog.dismiss();
             }
@@ -2676,7 +2585,7 @@ popNoidung();
             @Override
             public void onClick(View v) {
                 love.setImageResource(R.drawable.love6);
-                editor.putInt("love",6);
+                editor.putInt("love", 6);
                 editor.commit();
                 dialog.dismiss();
             }
@@ -2686,70 +2595,72 @@ popNoidung();
         dialog.show();
     }
 
-    public void lovex(){
-        int i=sharedPreferences.getInt("love",0);
-        if (i==0){
+    public void lovex() {
+        int i = sharedPreferences.getInt("love", 0);
+        if (i == 0) {
             love.setImageResource(R.drawable.love4);
         }
-        if (i==1){
+        if (i == 1) {
             love.setImageResource(R.drawable.love1);
         }
-        if (i==2){
+        if (i == 2) {
             love.setImageResource(R.drawable.love2);
         }
-        if (i==3){
+        if (i == 3) {
             love.setImageResource(R.drawable.love3);
         }
-        if (i==4){
+        if (i == 4) {
             love.setImageResource(R.drawable.love4);
         }
-        if (i==5){
+        if (i == 5) {
             love.setImageResource(R.drawable.love5);
         }
-        if (i==6){
+        if (i == 6) {
             love.setImageResource(R.drawable.love6);
         }
     }
-    class RunAble implements Runnable{
+
+    class RunAble implements Runnable {
         int seconds;
+
         public RunAble(int seconds) {
             this.seconds = seconds;
         }
+
         @Override
         public void run() {
-            for (int i=0;i<=60;i++){
-                Handler handler=new Handler(Looper.getMainLooper());
-                final int intI=i;
+            for (int i = 0; i <= 60; i++) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                final int intI = i;
                 handler.post(new Runnable() {
                     @RequiresApi(api = Build.VERSION_CODES.M)
                     @Override
                     public void run() {
-                        txtgiay.setText(intI+"");
+                        txtgiay.setText(intI + "");
 
-                        if (intI==60){
-                            txtphut.setText(Integer.parseInt(txtphut.getText().toString().trim())+1+"");
-                            RunAble  runAble1=new RunAble(5);
+                        if (intI == 60) {
+                            txtphut.setText(Integer.parseInt(txtphut.getText().toString().trim()) + 1 + "");
+                            RunAble runAble1 = new RunAble(5);
                             new Thread(runAble1).start();
                         }
 
-                        if (Integer.parseInt(txtphut.getText().toString().trim())==60){
-                            txtphut.setText(00+"");
-                            txtgio.setText(Integer.parseInt(txtgio.getText().toString().trim())+1+"");
-                            RunAble  runAble1=new RunAble(5);
+                        if (Integer.parseInt(txtphut.getText().toString().trim()) == 60) {
+                            txtphut.setText(00 + "");
+                            txtgio.setText(Integer.parseInt(txtgio.getText().toString().trim()) + 1 + "");
+                            RunAble runAble1 = new RunAble(5);
                             new Thread(runAble1).start();
                         }
 
-                        if (Integer.parseInt(txtgio.getText().toString().trim())==24){
-                            txtgio.setText(00+"");
-                            txtngay.setText(Integer.parseInt(txtngay.getText().toString().trim())+1+"");
-                            RunAble  runAble1=new RunAble(5);
+                        if (Integer.parseInt(txtgio.getText().toString().trim()) == 24) {
+                            txtgio.setText(00 + "");
+                            txtngay.setText(Integer.parseInt(txtngay.getText().toString().trim()) + 1 + "");
+                            RunAble runAble1 = new RunAble(5);
                             new Thread(runAble1).start();
                         }
 
 
                     }
                 });
-
 
 
                 try {
@@ -2761,20 +2672,20 @@ popNoidung();
             }
 
 
-
         }
     }
-    public void getData(){
+
+    public void getData() {
         Cursor cursor = dataBase.getSoNgayYeu();
-        if (cursor.moveToNext()){
-            int datelove=cursor.getInt(1);
+        if (cursor.moveToNext()) {
+            int datelove = cursor.getInt(1);
 
             double so = datelove;
             double so1 = 365;
 
             double nam1 = so / so1;
             int nguyen = (int) nam1;
-            txtnam.setText(nguyen+"");
+            txtnam.setText(nguyen + "");
             double sodu = so - (nguyen * so1);
 
             double thang1 = sodu / 30;
@@ -2788,22 +2699,22 @@ popNoidung();
 
     }
 
-    public void tieude(){
+    public void tieude() {
 
-        final Dialog dialog=new Dialog(getActivity());
+        final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_name);
-        final EditText editText=dialog.findViewById(R.id.txtName);
-        Button thaydoi=dialog.findViewById(R.id.thaydoi);
+        final EditText editText = dialog.findViewById(R.id.txtName);
+        Button thaydoi = dialog.findViewById(R.id.thaydoi);
         editText.setText(txtNgayYeu.getText().toString().trim());
 
         thaydoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (editText.getText().toString().trim().equals("")){
+                if (editText.getText().toString().trim().equals("")) {
                     editText.setError(getString(R.string.error));
                     return;
                 }
-                if (editText.getText().toString().trim().length()>20){
+                if (editText.getText().toString().trim().length() > 20) {
                     editText.setError("Tối đa 20 kí tự");
                     return;
                 }
@@ -2823,20 +2734,22 @@ popNoidung();
         dialog.show();
     }
 
-    public void ngayyeu(){
+    public void ngayyeu() {
         final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_age);
         dialog.getActionBar();
         dialog.setCancelable(false);
         dialog.setTitle("Sửa ngày yêu");
         Button chonngay1 = dialog.findViewById(R.id.chonngay1);
-        TextView txtLogo=dialog.findViewById(R.id.txtLogo);
-
+        TextView txtLogo = dialog.findViewById(R.id.txtLogo);
+        txtLogo.setText("Thay đổi ngày yêu");
         final EditText ngay1;
         Button luu = dialog.findViewById(R.id.luu);
         Button huy = dialog.findViewById(R.id.huybo);
         ngay1 = dialog.findViewById(R.id.ngaysinh1);
         ngay1.setEnabled(false);
+        ngay1.setText("Ngày yêu");
+        luu.setText("Thay đổi");
         chonngay1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -2870,19 +2783,19 @@ popNoidung();
         luu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ngay1.getText().toString().equals("") ) {
+                if (ngay1.getText().toString().equals("")) {
                     Toast.makeText(getActivity(), "Chưa có gì để thêm", Toast.LENGTH_SHORT).show();
                 } else {
-                    Cursor cursor=dataBase.getNgayyeu();
-                    if (!ngay1.getText().toString().trim().equals("")){
+                    Cursor cursor = dataBase.getNgayyeu();
+                    if (!ngay1.getText().toString().trim().equals("")) {
                         int ngayyeu = (int) (calendar3.getTimeInMillis() / (1000 * 60 * 60 * 24));
                         int ngay = (int) ((calendartr.getTimeInMillis() - calendar3.getTimeInMillis()) / (1000 * 60 * 60 * 24));
-                        if (ngay<0){
+                        if (ngay < 0) {
                             ngay1.setText("Chưa yêu mà đã tính rồi");
-                        }else {
+                        } else {
                             dataBase.updateSoNgayYeu(ngay, 1);
                             dataBase.updateNgayYeu(ngayyeu, 1);
-                            getDataDate();
+                            updateNgayyeu();
                             getData();
                             dialog.dismiss();
                         }
@@ -2895,63 +2808,63 @@ popNoidung();
             }
 
         });
-   dialog.show();
-
-
-
+        dialog.show();
 
 
     }
 
-    public void popNoidung(){
-        PopupMenu popupMenu=new PopupMenu(getActivity(),loaddingWave);
-        popupMenu.getMenuInflater().inflate(R.menu.menu,popupMenu.getMenu());
+    public void popNoidung() {
+        PopupMenu popupMenu = new PopupMenu(getActivity(), loaddingWave);
+        popupMenu.getMenuInflater().inflate(R.menu.menu, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.noidung:
                         tieude();
                         break;
                     case R.id.ngayyeu:
                         ngayyeu();
                         break;
+                    case R.id.hinh:
+                        loading();
+                        break;
                 }
                 return true;
             }
         });
-popupMenu.show();
+        popupMenu.show();
 
     }
 
-    public void toolbarx(){
+    public void toolbarx() {
         tolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popupMenu=new PopupMenu(getActivity(),tolbar);
-                popupMenu.getMenuInflater().inflate(R.menu.menu_tym,popupMenu.getMenu());
-                editor=sharedPreferences.edit();
+                PopupMenu popupMenu = new PopupMenu(getActivity(), tolbar);
+                popupMenu.getMenuInflater().inflate(R.menu.menu_tym, popupMenu.getMenu());
+                editor = sharedPreferences.edit();
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()){
+                        switch (item.getItemId()) {
                             case R.id.hong:
-                                editor.putInt("maulove",1);
+                                editor.putInt("maulove", 1);
                                 editor.commit();
                                 clickPick();
                                 break;
                             case R.id.tim:
-                                editor.putInt("maulove",2);
+                                editor.putInt("maulove", 2);
                                 editor.commit();
                                 clickTim();
                                 break;
                             case R.id.vang:
-                                editor.putInt("maulove",3);
+                                editor.putInt("maulove", 3);
                                 editor.commit();
                                 clickVang();
                                 break;
                             case R.id.nau:
-                                editor.putInt("maulove",4);
+                                editor.putInt("maulove", 4);
                                 editor.commit();
                                 clickNau();
                                 break;
@@ -2964,7 +2877,7 @@ popupMenu.show();
         });
     }
 
-    void clickPick(){
+    void clickPick() {
         imgLove.setImageResource(R.drawable.love_hong);
         imgLove1.setImageResource(R.drawable.love_hong);
         imgLove2.setImageResource(R.drawable.love_hong);
@@ -2973,7 +2886,7 @@ popupMenu.show();
         imgLove5.setImageResource(R.drawable.love_hong);
     }
 
-    void clickTim(){
+    void clickTim() {
         imgLove.setImageResource(R.drawable.icon_tim);
         imgLove1.setImageResource(R.drawable.icon_tim);
         imgLove2.setImageResource(R.drawable.icon_tim);
@@ -2982,7 +2895,7 @@ popupMenu.show();
         imgLove5.setImageResource(R.drawable.icon_tim);
     }
 
-    void clickVang(){
+    void clickVang() {
         imgLove.setImageResource(R.drawable.love_vang);
         imgLove1.setImageResource(R.drawable.love_vang);
         imgLove2.setImageResource(R.drawable.love_vang);
@@ -2991,7 +2904,7 @@ popupMenu.show();
         imgLove5.setImageResource(R.drawable.love_vang);
     }
 
-    void clickNau(){
+    void clickNau() {
         imgLove.setImageResource(R.drawable.love_nau);
         imgLove1.setImageResource(R.drawable.love_nau);
         imgLove2.setImageResource(R.drawable.love_nau);
@@ -3000,20 +2913,101 @@ popupMenu.show();
         imgLove5.setImageResource(R.drawable.love_nau);
     }
 
-    void laymau(){
-        int i=sharedPreferences.getInt("maulove",1);
-        if (i==1){
+    void laymau() {
+        int i = sharedPreferences.getInt("maulove", 1);
+        if (i == 1) {
             clickPick();
         }
-        if (i==2){
+        if (i == 2) {
             clickTim();
         }
-        if (i==3){
+        if (i == 3) {
             clickVang();
         }
-        if (i==4){
+        if (i == 4) {
             clickNau();
         }
     }
 
+
+
+    private void requestStoragePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("Permission needed")
+                    .setMessage("This permission is needed because of this and that")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(getActivity(),
+                                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                        }
+                    })
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+
+        } else {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getActivity(), "Permission GRANTED", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getActivity(), "Permission DENIED", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+    public void loading(){
+      color10();
+    }
+
+    private void color10() {
+
+        changeBackgroundColor(currentBackgroundColor);
+        ColorPickerDialogBuilder
+                .with(getActivity())
+                .setTitle("Chọn màu")
+                .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
+                .density(12)
+                .setOnColorSelectedListener(new OnColorSelectedListener() {
+                    @Override
+                    public void onColorSelected(int i) {
+
+                    }
+                })
+                .setPositiveButton("Oki", new ColorPickerClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i, Integer[] integers) {
+                        editor = sharedPreferences.edit();
+                        editor.putInt("loading", i);
+                        loaddingWave.setBorderColor(i);
+                        loaddingWave.setWaveColor(i);
+                        editor.commit();
+
+
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).showColorEdit(true)
+                .setColorEditTextColor(ContextCompat.getColor(getActivity(), android.R.color.holo_blue_bright))
+                .build()
+                .show();
+    }
 }

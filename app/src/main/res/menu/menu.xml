@@ -4,4 +4,6 @@
     android:id="@+id/noidung"/>
     <item android:id="@+id/ngayyeu"
         android:title="Đổi ngày yêu"/>
+    <item android:id="@+id/hinh"
+        android:title="Đổi hình "/>
 </menu>

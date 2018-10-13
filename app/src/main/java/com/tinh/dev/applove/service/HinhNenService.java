@@ -520,27 +520,31 @@ public class HinhNenService extends Service {
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
         } else {
-            if (uribackground.equals("")) {
-                a.setImageResource(R.drawable.hinhnen_1);
-            } else {
-                a.setImageURI(Uri.parse(Uri.decode(uribackground)));
-            }
-            if (uriBoy.equals("")) {
+           try{
+               if (uribackground.equals("")) {
+                   a.setImageResource(R.drawable.hinhnen_1);
+               } else {
+                   a.setImageURI(Uri.parse(Uri.decode(uribackground)));
+               }
+               if (uriBoy.equals("")) {
 
-                imgBoy.setImageResource(R.drawable.hinhnen_1);
-            } else {
+                   imgBoy.setImageResource(R.drawable.hinhnen_1);
+               } else {
 
-                imgBoy.setImageURI(Uri.parse(Uri.decode(uriBoy)));
-            }
+                   imgBoy.setImageURI(Uri.parse(Uri.decode(uriBoy)));
+               }
 
-            if (uriGirl.equals("")) {
+               if (uriGirl.equals("")) {
 
-                imgGirl.setImageResource(R.drawable.hinhnen_1);
-            } else {
+                   imgGirl.setImageResource(R.drawable.hinhnen_1);
+               } else {
 
-                imgGirl.setImageURI(Uri.parse(Uri.decode(uriGirl)));
-            }
+                   imgGirl.setImageURI(Uri.parse(Uri.decode(uriGirl)));
+               }
 
+           }catch (Exception e){
+
+           }
 
         }
     }

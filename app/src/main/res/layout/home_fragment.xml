@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
    <ImageView
        android:layout_width="65dp"
        android:layout_height="65dp"
@@ -315,10 +316,6 @@
         app:wlv_titleTopStrokeWidth="3dp"
         app:wlv_titleTopColor="@color/white"
         app:wlv_titleTopSize="15sp"
-
-
-
-
         app:wlv_titleBottomStrokeColor="@color/hong"
         app:wlv_titleBottomStrokeWidth="3dp"
         app:wlv_titleBottomColor="@color/white"
@@ -326,10 +323,9 @@
 
         app:wlv_waveAmplitude="70"
         app:wlv_waveColor="@color/spanscreen"
-
-
-
         />
+
+
 
 
 
@@ -674,10 +670,10 @@
     </LinearLayout>
 
     <ImageView
+        android:visibility="gone"
         android:layout_width="33dp"
         android:layout_height="33dp"
         android:id="@+id/setting"
-        android:src="@drawable/settings"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="5dp"

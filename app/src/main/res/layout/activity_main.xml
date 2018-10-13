@@ -1,22 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/draw">
 
-    <android.support.v4.view.ViewPager
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/viewPaer">
-    </android.support.v4.view.ViewPager>
-    <android.support.design.widget.TabLayout
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:id="@+id/tab">
-    </android.support.design.widget.TabLayout>
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <android.support.v4.view.ViewPager
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:id="@+id/viewPaer">
+       </android.support.v4.view.ViewPager>
+       <android.support.design.widget.TabLayout
+           android:layout_alignParentBottom="true"
+           android:layout_width="match_parent"
+           android:layout_height="10dp"
+           android:id="@+id/tab">
+       </android.support.design.widget.TabLayout>
 
 
-</RelativeLayout>
+   </RelativeLayout>
+
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="200dp"
+        style="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="@drawable/style9"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="#FF23"
+        android:layout_height="wrap_content"
+        app:menu="@menu/navigation"
+        android:layout_gravity="start|bottom"
+        android:fitsSystemWindows="true"
+        >
+    </android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>

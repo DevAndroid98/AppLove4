@@ -18,4 +18,8 @@
 
     <color name="spanscreen">#de5d54</color>
     <color name="red">#f44336</color>
+
+
+    <color name="colorman">#E01744</color>
+    <color name="colorred">#FF220C</color>
 </resources>
