@@ -178,6 +178,7 @@ public class HomeFragment extends Fragment {
     private TextView ngay2;
     private String uribackground, uriGirl, uriBoy, hp;
     private ImageView mp3;
+    private  int datelove;
 
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
 
@@ -353,6 +354,14 @@ public class HomeFragment extends Fragment {
         toolbarx();
         lovex();
         laymau();
+        int loading=sharedPreferences.getInt("loading",0);
+        if (loading!=0){
+            loaddingWave.setWaveColor(loading);
+            loaddingWave.setProgressValue(15);
+            loaddingWave.setBorderColor(loading);
+        }
+        String tieude=sharedPreferences.getString("tieude","");
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(getActivity())) {
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
@@ -2720,11 +2729,13 @@ public class HomeFragment extends Fragment {
                 }
                 Cursor cursor = dataBase.getSoNgayYeu();
                 if (cursor.moveToNext()) {
-                    int datelove = cursor.getInt(1);
+                     datelove = cursor.getInt(1);
                     if (datelove == 0) {
                         txtNgayYeu.setText("Start love");
                     } else {
                         txtNgayYeu.setText("\t\t" + String.valueOf(datelove) + "\tngày" + "\n\t" + editText.getText().toString().trim());
+                        editor=sharedPreferences.edit();
+                        editor.putString("tieude",editText.getText().toString().trim());
                         dialog.dismiss();
                     }
                 }
